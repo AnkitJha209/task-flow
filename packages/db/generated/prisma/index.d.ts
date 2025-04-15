@@ -49,10 +49,19 @@ export type Role = (typeof Role)[keyof typeof Role]
 export const TaskStatus: {
   TODO: 'TODO',
   IN_PROGRESS: 'IN_PROGRESS',
+  IN_REVIEW: 'IN_REVIEW',
   DONE: 'DONE'
 };
 
 export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus]
+
+
+export const TagEnum: {
+  ISSUE: 'ISSUE',
+  FEATURE: 'FEATURE'
+};
+
+export type TagEnum = (typeof TagEnum)[keyof typeof TagEnum]
 
 }
 
@@ -63,6 +72,10 @@ export const Role: typeof $Enums.Role
 export type TaskStatus = $Enums.TaskStatus
 
 export const TaskStatus: typeof $Enums.TaskStatus
+
+export type TagEnum = $Enums.TagEnum
+
+export const TagEnum: typeof $Enums.TagEnum
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2427,6 +2440,7 @@ export namespace Prisma {
     name: string | null
     description: string | null
     createdById: string | null
+    githubRepo: string | null
     createdAt: Date | null
   }
 
@@ -2435,6 +2449,7 @@ export namespace Prisma {
     name: string | null
     description: string | null
     createdById: string | null
+    githubRepo: string | null
     createdAt: Date | null
   }
 
@@ -2443,6 +2458,7 @@ export namespace Prisma {
     name: number
     description: number
     createdById: number
+    githubRepo: number
     createdAt: number
     _all: number
   }
@@ -2453,6 +2469,7 @@ export namespace Prisma {
     name?: true
     description?: true
     createdById?: true
+    githubRepo?: true
     createdAt?: true
   }
 
@@ -2461,6 +2478,7 @@ export namespace Prisma {
     name?: true
     description?: true
     createdById?: true
+    githubRepo?: true
     createdAt?: true
   }
 
@@ -2469,6 +2487,7 @@ export namespace Prisma {
     name?: true
     description?: true
     createdById?: true
+    githubRepo?: true
     createdAt?: true
     _all?: true
   }
@@ -2550,6 +2569,7 @@ export namespace Prisma {
     name: string
     description: string | null
     createdById: string
+    githubRepo: string | null
     createdAt: Date
     _count: ProjectCountAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
@@ -2575,6 +2595,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     createdById?: boolean
+    githubRepo?: boolean
     createdAt?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     members?: boolean | Project$membersArgs<ExtArgs>
@@ -2587,6 +2608,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     createdById?: boolean
+    githubRepo?: boolean
     createdAt?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
@@ -2596,6 +2618,7 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     createdById?: boolean
+    githubRepo?: boolean
     createdAt?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
@@ -2605,10 +2628,11 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     createdById?: boolean
+    githubRepo?: boolean
     createdAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdById" | "createdAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdById" | "githubRepo" | "createdAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     members?: boolean | Project$membersArgs<ExtArgs>
@@ -2634,6 +2658,7 @@ export namespace Prisma {
       name: string
       description: string | null
       createdById: string
+      githubRepo: string | null
       createdAt: Date
     }, ExtArgs["result"]["project"]>
     composites: {}
@@ -3065,6 +3090,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Project", 'String'>
     readonly description: FieldRef<"Project", 'String'>
     readonly createdById: FieldRef<"Project", 'String'>
+    readonly githubRepo: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
   }
     
@@ -4597,6 +4623,7 @@ export namespace Prisma {
     description: string | null
     status: $Enums.TaskStatus | null
     projectId: string | null
+    tag: $Enums.TagEnum | null
     assignedToId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4608,6 +4635,7 @@ export namespace Prisma {
     description: string | null
     status: $Enums.TaskStatus | null
     projectId: string | null
+    tag: $Enums.TagEnum | null
     assignedToId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4619,6 +4647,7 @@ export namespace Prisma {
     description: number
     status: number
     projectId: number
+    tag: number
     assignedToId: number
     createdAt: number
     updatedAt: number
@@ -4632,6 +4661,7 @@ export namespace Prisma {
     description?: true
     status?: true
     projectId?: true
+    tag?: true
     assignedToId?: true
     createdAt?: true
     updatedAt?: true
@@ -4643,6 +4673,7 @@ export namespace Prisma {
     description?: true
     status?: true
     projectId?: true
+    tag?: true
     assignedToId?: true
     createdAt?: true
     updatedAt?: true
@@ -4654,6 +4685,7 @@ export namespace Prisma {
     description?: true
     status?: true
     projectId?: true
+    tag?: true
     assignedToId?: true
     createdAt?: true
     updatedAt?: true
@@ -4738,6 +4770,7 @@ export namespace Prisma {
     description: string | null
     status: $Enums.TaskStatus
     projectId: string
+    tag: $Enums.TagEnum
     assignedToId: string | null
     createdAt: Date
     updatedAt: Date
@@ -4766,6 +4799,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     projectId?: boolean
+    tag?: boolean
     assignedToId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4779,6 +4813,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     projectId?: boolean
+    tag?: boolean
     assignedToId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4792,6 +4827,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     projectId?: boolean
+    tag?: boolean
     assignedToId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4805,12 +4841,13 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     projectId?: boolean
+    tag?: boolean
     assignedToId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "projectId" | "assignedToId" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "projectId" | "tag" | "assignedToId" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     assignedTo?: boolean | Task$assignedToArgs<ExtArgs>
@@ -4836,6 +4873,7 @@ export namespace Prisma {
       description: string | null
       status: $Enums.TaskStatus
       projectId: string
+      tag: $Enums.TagEnum
       assignedToId: string | null
       createdAt: Date
       updatedAt: Date
@@ -5269,6 +5307,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Task", 'String'>
     readonly status: FieldRef<"Task", 'TaskStatus'>
     readonly projectId: FieldRef<"Task", 'String'>
+    readonly tag: FieldRef<"Task", 'TagEnum'>
     readonly assignedToId: FieldRef<"Task", 'String'>
     readonly createdAt: FieldRef<"Task", 'DateTime'>
     readonly updatedAt: FieldRef<"Task", 'DateTime'>
@@ -5737,6 +5776,7 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     createdById: 'createdById',
+    githubRepo: 'githubRepo',
     createdAt: 'createdAt'
   };
 
@@ -5759,6 +5799,7 @@ export namespace Prisma {
     description: 'description',
     status: 'status',
     projectId: 'projectId',
+    tag: 'tag',
     assignedToId: 'assignedToId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -5849,6 +5890,20 @@ export namespace Prisma {
    * Reference to a field of type 'TaskStatus[]'
    */
   export type ListEnumTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TagEnum'
+   */
+  export type EnumTagEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TagEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'TagEnum[]'
+   */
+  export type ListEnumTagEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TagEnum[]'>
     
 
 
@@ -5948,6 +6003,7 @@ export namespace Prisma {
     name?: StringFilter<"Project"> | string
     description?: StringNullableFilter<"Project"> | string | null
     createdById?: StringFilter<"Project"> | string
+    githubRepo?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     members?: ProjectMemberListRelationFilter
@@ -5959,6 +6015,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     createdById?: SortOrder
+    githubRepo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     createdBy?: UserOrderByWithRelationInput
     members?: ProjectMemberOrderByRelationAggregateInput
@@ -5973,6 +6030,7 @@ export namespace Prisma {
     name?: StringFilter<"Project"> | string
     description?: StringNullableFilter<"Project"> | string | null
     createdById?: StringFilter<"Project"> | string
+    githubRepo?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     members?: ProjectMemberListRelationFilter
@@ -5984,6 +6042,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     createdById?: SortOrder
+    githubRepo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: ProjectCountOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
@@ -5998,6 +6057,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Project"> | string
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
     createdById?: StringWithAggregatesFilter<"Project"> | string
+    githubRepo?: StringNullableWithAggregatesFilter<"Project"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
   }
 
@@ -6063,6 +6123,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Task"> | string | null
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     projectId?: StringFilter<"Task"> | string
+    tag?: EnumTagEnumFilter<"Task"> | $Enums.TagEnum
     assignedToId?: StringNullableFilter<"Task"> | string | null
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
@@ -6076,6 +6137,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     projectId?: SortOrder
+    tag?: SortOrder
     assignedToId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6092,6 +6154,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Task"> | string | null
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     projectId?: StringFilter<"Task"> | string
+    tag?: EnumTagEnumFilter<"Task"> | $Enums.TagEnum
     assignedToId?: StringNullableFilter<"Task"> | string | null
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
@@ -6105,6 +6168,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     projectId?: SortOrder
+    tag?: SortOrder
     assignedToId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6122,6 +6186,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Task"> | string | null
     status?: EnumTaskStatusWithAggregatesFilter<"Task"> | $Enums.TaskStatus
     projectId?: StringWithAggregatesFilter<"Task"> | string
+    tag?: EnumTagEnumWithAggregatesFilter<"Task"> | $Enums.TagEnum
     assignedToId?: StringNullableWithAggregatesFilter<"Task"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
@@ -6213,6 +6278,7 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    githubRepo?: string | null
     createdAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedProjectsInput
     members?: ProjectMemberCreateNestedManyWithoutProjectInput
@@ -6224,6 +6290,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     createdById: string
+    githubRepo?: string | null
     createdAt?: Date | string
     members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
@@ -6233,6 +6300,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedProjectsNestedInput
     members?: ProjectMemberUpdateManyWithoutProjectNestedInput
@@ -6244,6 +6312,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
@@ -6254,6 +6323,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     createdById: string
+    githubRepo?: string | null
     createdAt?: Date | string
   }
 
@@ -6261,6 +6331,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6269,6 +6340,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6324,6 +6396,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
+    tag?: $Enums.TagEnum
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutTasksInput
@@ -6336,6 +6409,7 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     projectId: string
+    tag?: $Enums.TagEnum
     assignedToId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6346,6 +6420,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutTasksNestedInput
@@ -6358,6 +6433,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     projectId?: StringFieldUpdateOperationsInput | string
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6369,6 +6445,7 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     projectId: string
+    tag?: $Enums.TagEnum
     assignedToId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6379,6 +6456,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6389,6 +6467,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     projectId?: StringFieldUpdateOperationsInput | string
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6559,6 +6638,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     createdById?: SortOrder
+    githubRepo?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6567,6 +6647,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     createdById?: SortOrder
+    githubRepo?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6575,6 +6656,7 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     createdById?: SortOrder
+    githubRepo?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -6629,6 +6711,13 @@ export namespace Prisma {
     not?: NestedEnumTaskStatusFilter<$PrismaModel> | $Enums.TaskStatus
   }
 
+  export type EnumTagEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.TagEnum | EnumTagEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumTagEnumFilter<$PrismaModel> | $Enums.TagEnum
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -6640,6 +6729,7 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     projectId?: SortOrder
+    tag?: SortOrder
     assignedToId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6651,6 +6741,7 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     projectId?: SortOrder
+    tag?: SortOrder
     assignedToId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6662,6 +6753,7 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     projectId?: SortOrder
+    tag?: SortOrder
     assignedToId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6675,6 +6767,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTaskStatusFilter<$PrismaModel>
     _max?: NestedEnumTaskStatusFilter<$PrismaModel>
+  }
+
+  export type EnumTagEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TagEnum | EnumTagEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumTagEnumWithAggregatesFilter<$PrismaModel> | $Enums.TagEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTagEnumFilter<$PrismaModel>
+    _max?: NestedEnumTagEnumFilter<$PrismaModel>
   }
 
   export type ProjectCreateNestedManyWithoutCreatedByInput = {
@@ -6961,6 +7063,10 @@ export namespace Prisma {
     set?: $Enums.TaskStatus
   }
 
+  export type EnumTagEnumFieldUpdateOperationsInput = {
+    set?: $Enums.TagEnum
+  }
+
   export type ProjectUpdateOneRequiredWithoutTasksNestedInput = {
     create?: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutTasksInput
@@ -7112,6 +7218,13 @@ export namespace Prisma {
     not?: NestedEnumTaskStatusFilter<$PrismaModel> | $Enums.TaskStatus
   }
 
+  export type NestedEnumTagEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.TagEnum | EnumTagEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumTagEnumFilter<$PrismaModel> | $Enums.TagEnum
+  }
+
   export type NestedEnumTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TaskStatus | EnumTaskStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
@@ -7122,10 +7235,21 @@ export namespace Prisma {
     _max?: NestedEnumTaskStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumTagEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TagEnum | EnumTagEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TagEnum[] | ListEnumTagEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumTagEnumWithAggregatesFilter<$PrismaModel> | $Enums.TagEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTagEnumFilter<$PrismaModel>
+    _max?: NestedEnumTagEnumFilter<$PrismaModel>
+  }
+
   export type ProjectCreateWithoutCreatedByInput = {
     id?: string
     name: string
     description?: string | null
+    githubRepo?: string | null
     createdAt?: Date | string
     members?: ProjectMemberCreateNestedManyWithoutProjectInput
     tasks?: TaskCreateNestedManyWithoutProjectInput
@@ -7135,6 +7259,7 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    githubRepo?: string | null
     createdAt?: Date | string
     members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
@@ -7177,6 +7302,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
+    tag?: $Enums.TagEnum
     createdAt?: Date | string
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutTasksInput
@@ -7188,6 +7314,7 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     projectId: string
+    tag?: $Enums.TagEnum
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7226,6 +7353,7 @@ export namespace Prisma {
     name?: StringFilter<"Project"> | string
     description?: StringNullableFilter<"Project"> | string | null
     createdById?: StringFilter<"Project"> | string
+    githubRepo?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
   }
 
@@ -7280,6 +7408,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Task"> | string | null
     status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
     projectId?: StringFilter<"Task"> | string
+    tag?: EnumTagEnumFilter<"Task"> | $Enums.TagEnum
     assignedToId?: StringNullableFilter<"Task"> | string | null
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
@@ -7341,6 +7470,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
+    tag?: $Enums.TagEnum
     createdAt?: Date | string
     updatedAt?: Date | string
     assignedTo?: UserCreateNestedOneWithoutTasksInput
@@ -7351,6 +7481,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
+    tag?: $Enums.TagEnum
     assignedToId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7466,6 +7597,7 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    githubRepo?: string | null
     createdAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedProjectsInput
     tasks?: TaskCreateNestedManyWithoutProjectInput
@@ -7476,6 +7608,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     createdById: string
+    githubRepo?: string | null
     createdAt?: Date | string
     tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
@@ -7535,6 +7668,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedProjectsNestedInput
     tasks?: TaskUpdateManyWithoutProjectNestedInput
@@ -7545,6 +7679,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
@@ -7553,6 +7688,7 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    githubRepo?: string | null
     createdAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedProjectsInput
     members?: ProjectMemberCreateNestedManyWithoutProjectInput
@@ -7563,6 +7699,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     createdById: string
+    githubRepo?: string | null
     createdAt?: Date | string
     members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
   }
@@ -7616,6 +7753,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedProjectsNestedInput
     members?: ProjectMemberUpdateManyWithoutProjectNestedInput
@@ -7626,6 +7764,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
   }
@@ -7669,6 +7808,7 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
+    githubRepo?: string | null
     createdAt?: Date | string
   }
 
@@ -7684,6 +7824,7 @@ export namespace Prisma {
     description?: string | null
     status?: $Enums.TaskStatus
     projectId: string
+    tag?: $Enums.TagEnum
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7692,6 +7833,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: ProjectMemberUpdateManyWithoutProjectNestedInput
     tasks?: TaskUpdateManyWithoutProjectNestedInput
@@ -7701,6 +7843,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
@@ -7710,6 +7853,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    githubRepo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7736,6 +7880,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutTasksNestedInput
@@ -7747,6 +7892,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     projectId?: StringFieldUpdateOperationsInput | string
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7757,6 +7903,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
     projectId?: StringFieldUpdateOperationsInput | string
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7772,6 +7919,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     status?: $Enums.TaskStatus
+    tag?: $Enums.TagEnum
     assignedToId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7800,6 +7948,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTo?: UserUpdateOneWithoutTasksNestedInput
@@ -7810,6 +7959,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7820,6 +7970,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    tag?: EnumTagEnumFieldUpdateOperationsInput | $Enums.TagEnum
     assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

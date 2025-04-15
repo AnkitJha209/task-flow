@@ -132,6 +132,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   name: 'name',
   description: 'description',
   createdById: 'createdById',
+  githubRepo: 'githubRepo',
   createdAt: 'createdAt'
 };
 
@@ -148,6 +149,7 @@ exports.Prisma.TaskScalarFieldEnum = {
   description: 'description',
   status: 'status',
   projectId: 'projectId',
+  tag: 'tag',
   assignedToId: 'assignedToId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -175,7 +177,13 @@ exports.Role = exports.$Enums.Role = {
 exports.TaskStatus = exports.$Enums.TaskStatus = {
   TODO: 'TODO',
   IN_PROGRESS: 'IN_PROGRESS',
+  IN_REVIEW: 'IN_REVIEW',
   DONE: 'DONE'
+};
+
+exports.TagEnum = exports.$Enums.TagEnum = {
+  ISSUE: 'ISSUE',
+  FEATURE: 'FEATURE'
 };
 
 exports.Prisma.ModelName = {

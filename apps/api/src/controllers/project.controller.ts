@@ -180,3 +180,115 @@ export const joinProject = async (req: authRequest, res: Response) => {
 }
 
 
+export const getAllProjects  = async (req: authRequest, res: Response) => {
+    try {
+        const projects = await prisma.user.findFirst({
+            where: {
+                id: req.user?.id
+            },
+            include: {
+                projects: true
+            }
+        });
+
+        res.status(200).json({
+            message: "Projects fetched successfully",
+            projects: projects?.projects || []
+        });
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+}
+
+export const getSpecificProject = async (req: authRequest, res: Response) => {
+    try {
+        const {projectId} = req.params  
+        const id = req.user?.id
+
+        if (!projectId || typeof projectId !== 'string') {
+            res.status(400).json({ message: "Invalid projectId" });
+            return
+        }
+
+        const userIsMember = await prisma.projectMember.findFirst({
+            where: {
+                userId : id,
+                projectId: projectId
+            }
+        })
+        if(!userIsMember){
+            res.status(404).json({
+                message: "User is not part of this project"
+            })
+            return
+        }
+
+        const projectDetails = await prisma.project.findUnique({
+            where: {
+                id: projectId
+            }
+        })
+
+        if(!projectDetails){
+            res.status(404).json({
+                message: "Project not found"
+            })
+            return
+        }
+        res.status(200).json({
+            message: "Project Details Found Successfully",
+            projectDetails
+        })
+
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+        return
+    }
+}
+
+export const getProjectDevelopers = async (req: Request, res: Response) => {
+    const { projectId } = req.params;
+  
+    try {
+      const members = await prisma.projectMember.findMany({
+        where: { projectId },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              role: true,
+            },
+          },
+        },
+      });
+  
+      // Filter only developers if needed
+      const developers = members
+        .filter((m) => m.user.role === "DEVELOPER")
+        .map((m) => ({
+          id: m.user.id,
+          name: m.user.name,
+          email: m.user.email,
+        }));
+  
+      res.status(200).json({
+        message: "Developers fetched successfully",
+        developers,
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Failed to fetch developers" });
+    }
+  };
+  
+
