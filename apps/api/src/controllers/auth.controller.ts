@@ -5,8 +5,6 @@ import { prisma } from "@workspace/db/client";
 import dotenv from 'dotenv';
 dotenv.config()
 
-// This should be moved to environment variables in production
-const JWT_SECRET = "your-secret-key";
 
 export const signup = async (req: Request, res: Response) => {
   try {
