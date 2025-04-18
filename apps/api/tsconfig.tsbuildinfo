@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/controllers/auth.controller.ts","./src/controllers/project.controller.ts","./src/middleware/auth.middleware.ts","./src/routes/auth.route.ts","./src/utils/sendinvitemail.ts"],"version":"5.7.3"}
+{"root":["./src/index.ts","./src/controllers/auth.controller.ts","./src/controllers/project.controller.ts","./src/controllers/task.controller.ts","./src/middleware/auth.middleware.ts","./src/routes/auth.route.ts","./src/utils/sendinvitemail.ts","./src/utils/sendtask.ts"],"version":"5.7.3"}
