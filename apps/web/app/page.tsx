@@ -1,6 +1,6 @@
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
-import Image from "next/image";
+
 
 export default function Page() {
   return (
@@ -10,7 +10,7 @@ export default function Page() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-              <span className="text-white font-bold">J</span>
+              <span className="text-white font-bold">T</span>
             </div>
             <span className="text-xl font-bold">TaskFlow</span>
           </div>

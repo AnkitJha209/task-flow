@@ -1,7 +1,6 @@
 import { Response } from "express";
 import { authRequest } from "../middleware/auth.middleware.js";
 import { prisma } from "@workspace/db/client";
-import { sendMail } from "../utils/sendInviteMail.js";
 import { sendTaskAssignedMail } from "../utils/sendTask.js";
 
 export const createTask = async (req: authRequest, res: Response) => {

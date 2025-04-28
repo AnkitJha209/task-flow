@@ -1,12 +1,12 @@
 import express from "express";
 import router from "./routes/auth.route.js";
-
+import cors from "cors"
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors())
 // Routes
 app.use("/api/v1/", router);
 

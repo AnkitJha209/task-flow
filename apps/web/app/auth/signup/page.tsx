@@ -1,8 +1,39 @@
+"use client"
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 import Image from "next/image";
+import { use, useState } from "react";
+import axios from "axios";
 
 export default function SignUpPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleOnClick = async (e: any) => {
+    e.preventDefault()
+    const res = await axios.post("http://localhost:8000/api/v1/auth/signup", {
+      name,
+      email,
+      password,
+      role: "MANAGER"
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+    )
+    if(res.status === 201) {
+      alert("User created successfully")
+    }
+    else if(res.status === 400) {
+      alert("User already exists")
+    }
+    else {
+      alert("Error creating user")
+    }
+  }
   return (
     <div className="flex min-h-screen">
       {/* Left side - Form */}
@@ -29,39 +60,24 @@ export default function SignUpPage() {
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
             <div className="space-y-4 rounded-md shadow-sm">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-1">
                 <div>
                   <label
                     htmlFor="first-name"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    First name
+                    Name
                   </label>
                   <input
-                    id="first-name"
-                    name="first-name"
+                    id="name"
+                    name="name"
                     type="text"
                     autoComplete="given-name"
                     required
                     className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                     placeholder="John"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Last name
-                  </label>
-                  <input
-                    id="last-name"
-                    name="last-name"
-                    type="text"
-                    autoComplete="family-name"
-                    required
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                    placeholder="Doe"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
                   />
                 </div>
               </div>
@@ -80,6 +96,8 @@ export default function SignUpPage() {
                   required
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                   placeholder="you@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
               </div>
               <div>
@@ -97,28 +115,13 @@ export default function SignUpPage() {
                   required
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                   placeholder="••••••••"
+                  onChange={(e) => setPassword(e.target.value)} 
+                  value={password}
                 />
                 <p className="mt-1 text-xs text-gray-500">
                   Must be at least 8 characters with a mix of letters, numbers &
                   symbols
                 </p>
-              </div>
-              <div>
-                <label
-                  htmlFor="confirm-password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Confirm password
-                </label>
-                <input
-                  id="confirm-password"
-                  name="confirm-password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                  placeholder="••••••••"
-                />
               </div>
             </div>
 
@@ -136,7 +139,7 @@ export default function SignUpPage() {
               >
                 I agree to the{" "}
                 <Link
-                  href="#"
+                  href="#" 
                   className="font-medium text-blue-600 hover:text-blue-500"
                 >
                   Terms of Service
@@ -152,13 +155,13 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" onClick={(e)=>handleOnClick(e)} className="w-full">
                 Create account
               </Button>
             </div>
           </form>
 
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
@@ -194,7 +197,7 @@ export default function SignUpPage() {
                 Facebook
               </Button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
